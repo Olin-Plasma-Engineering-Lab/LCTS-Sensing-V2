@@ -1,7 +1,10 @@
 import serial
-import pandas as pd
 from time import time, ctime
 from datetime import datetime
+
+# TODO
+# Start timer (second) when data starts coming in
+# Check if comma is needed at the end of a row
 
 
 # Set time in unit seconds
