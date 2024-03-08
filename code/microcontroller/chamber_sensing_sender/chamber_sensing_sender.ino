@@ -18,14 +18,14 @@ void setup()
   digitalWrite(LED_BUILTIN, HIGH);
   Serial.begin(9600);
   Wire.begin();
-  Wire1.setSDA(4);
-  Wire1.setSCL(5);
+  Wire1.setSDA(2);
+  Wire1.setSCL(3);
   Wire1.begin(CAL_ADDR);
   Wire1.onReceive(receiveEvent);
-
 }
 
-void receiveEvent(int numBytes) {
+void receiveEvent(int numBytes)
+{
   byte direction = Wire.read();
   if (direction == 2)
   {
