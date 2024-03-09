@@ -26,7 +26,8 @@ void setup()
 
 void receiveEvent(int numBytes)
 {
-  byte direction = Wire.read();
+  byte direction = Wire1.read();
+  Serial.println("Recieved");
   if (direction == 2)
   {
     calibration.step(step);
@@ -60,5 +61,5 @@ void loop()
     Serial.println(result);
   }
 
-  // Serial.println(force);
+  Serial.println(force);
 }

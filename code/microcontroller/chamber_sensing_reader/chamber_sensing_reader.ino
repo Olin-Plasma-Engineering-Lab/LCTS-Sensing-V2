@@ -10,8 +10,8 @@ void setup() {
   digitalWrite(LED_BUILTIN, HIGH);
   Wire.begin(COMMS_ADDR);
   Wire.onReceive(receiveEvent);
-  Wire1.setSDA(4);
-  Wire1.setSCL(5);
+  Wire1.setSDA(2);
+  Wire1.setSCL(3);
   Wire1.begin(); 
 }
 
@@ -29,6 +29,7 @@ void loop() {
 if (Serial.available()) {
       String data = Serial.readString();
       Serial.println(data);
+      Wire1.beginTransmission(CAL_ADDR);
       if (data == "up\n") {
         Wire1.write(2);  // send value 2
         Serial.println("up sent");
@@ -37,6 +38,11 @@ if (Serial.available()) {
         Wire1.write(1);  // send value 1
         Serial.println("down sent");
       }
-  }
+      int result = Wire1.endTransmission();  
+      if (result != 0) {
+        Serial.print("Error in I2C transmission: ");
+        Serial.println(result);
+      }
+      }
 }
   
