@@ -8,7 +8,7 @@ uint8_t FORCE_SENSOR = A0;
 const int REVOLUTION_STEPS = 200;
 uint16_t step = 10;
 
-Stepper calibration(REVOLUTION_STEPS, 9, 10, 11, 12);
+Stepper calibration(REVOLUTION_STEPS, 6, 7, 8, 9);
 
 void setup()
 {
