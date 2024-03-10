@@ -1,12 +1,18 @@
 #include <Wire.h>
 
-uint8_t COMMS_ADDR = 0x10;
+int const COMMS_ADDR = 0x10;
+int const CAL_ADDR = 0x20;
 uint16_t sensor_out;
 
 void setup() {
   Serial.begin(9600);
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
   Wire.begin(COMMS_ADDR);
   Wire.onReceive(receiveEvent);
+  Wire1.setSDA(2);
+  Wire1.setSCL(3);
+  Wire1.begin(); 
 }
 
 void receiveEvent(int numBytes) {
@@ -18,6 +24,25 @@ void receiveEvent(int numBytes) {
   }
 }
 
+
 void loop() {
-  // put your main code here, to run repeatedly:
+if (Serial.available()) {
+      String data = Serial.readString();
+      Serial.println(data);
+      Wire1.beginTransmission(CAL_ADDR);
+      if (data == "up\n") {
+        Wire1.write(2);  // send value 2
+        Serial.println("up sent");
+      }
+      if (data == "down\n") {
+        Wire1.write(1);  // send value 1
+        Serial.println("down sent");
+      }
+      int result = Wire1.endTransmission();  
+      if (result != 0) {
+        Serial.print("Error in I2C transmission: ");
+        Serial.println(result);
+      }
+      }
 }
+  
