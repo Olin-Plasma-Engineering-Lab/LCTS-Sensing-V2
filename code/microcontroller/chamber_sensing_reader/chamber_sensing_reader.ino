@@ -20,6 +20,8 @@ void receiveEvent(int numBytes) {
     uint8_t msb = Wire.read();        // Most significant byte
     uint8_t lsb = Wire.read();        // Least significant byte
     sensor_out = (msb << 8) | lsb;    // Combine the two bytes into a uint16_t value
+    Serial.print(millis());
+    Serial.print(",");
     Serial.println(sensor_out);
   }
 }

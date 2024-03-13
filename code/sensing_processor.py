@@ -20,26 +20,28 @@ CONTROLLER_COMM_PORT = "COM5"
 BAUD_RATE = 9600
 
 # Open the COM port to start communications
-serial_port = serial.Serial(CONTROLLER_COMM_PORT, BAUD_RATE, timeout=1)
+try:
+    serial_port = serial.Serial(CONTROLLER_COMM_PORT, BAUD_RATE, timeout=1)
+except serial.serialutil.SerialException:
+    print(
+        f"Device not found on port {CONTROLLER_COMM_PORT}. Close any programs (Arduino IDE) that may be using port"
+    )
+else:
+    with open(f"Trial {formatted_time}.csv", "w") as data:
 
+        # Set starting time to keep track of elapsed time between measurements
+        while True:
+            sensor_output = serial_port.readline().decode()
+            print(sensor_output)
+            # print(sensor_output)
+            # print(type(sensor_output))
 
-with open(f"Trial {formatted_time}.csv", "w") as data:
+            force, elapsed_time = (sensor for sensor in sensor_output.split(","))
 
-    # Set starting time to keep track of elapsed time between measurements
-    start_time = time.time()
-
-    while True:
-        sensor_output = int(serial_port.readline().decode())
-        # print(sensor_output)
-        # print(type(sensor_output))
-
-        if sensor_output > 0:
-            # force, temp_1, temp_2, etc = (int(sensor) for sensor in sensor_output.split(","))
-
-            force = sensor_output
+            # force = sensor_output
             data.write(ctime(time()))
             data.write(",")
-            data.write(time.time() - start_time)
-            data.write(",")
-            data.write(str(force))
+            data.write(sensor_output)
+            # data.write(",")
+            # data.write(force)
             data.write("\n")
