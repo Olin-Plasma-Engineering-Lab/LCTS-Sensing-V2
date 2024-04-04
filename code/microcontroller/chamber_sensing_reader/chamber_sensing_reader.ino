@@ -5,7 +5,7 @@ int const CAL_ADDR = 0x20;
 uint16_t sensor_out;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
   Wire.begin(COMMS_ADDR);
@@ -20,6 +20,8 @@ void receiveEvent(int numBytes) {
     uint8_t msb = Wire.read();        // Most significant byte
     uint8_t lsb = Wire.read();        // Least significant byte
     sensor_out = (msb << 8) | lsb;    // Combine the two bytes into a uint16_t value
+    Serial.print(millis());
+    Serial.print(",");
     Serial.println(sensor_out);
   }
 }

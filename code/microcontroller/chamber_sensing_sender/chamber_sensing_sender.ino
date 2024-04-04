@@ -6,17 +6,17 @@ int const CAL_ADDR = 0x20;
 uint16_t force;
 uint8_t FORCE_SENSOR = A0;
 const int REVOLUTION_STEPS = 200;
-uint16_t step = 10;
+uint16_t step = 200;
 
-Stepper calibration(REVOLUTION_STEPS, 6, 7, 8, 9);
+Stepper calibration(REVOLUTION_STEPS, 6, 7, 9, 8);
 
 void setup()
 {
-  calibration.setSpeed(60);
+  calibration.setSpeed(10);
   pinMode(FORCE_SENSOR, INPUT);
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
-  Serial.begin(9600);
+  Serial.begin(115200);
   Wire.begin();
   Wire1.setSDA(2);
   Wire1.setSCL(3);
