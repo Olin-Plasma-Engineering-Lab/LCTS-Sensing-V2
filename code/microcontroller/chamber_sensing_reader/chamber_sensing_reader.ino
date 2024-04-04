@@ -5,7 +5,7 @@ int const CAL_ADDR = 0x20;
 uint16_t sensor_out;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
   Wire.begin(COMMS_ADDR);

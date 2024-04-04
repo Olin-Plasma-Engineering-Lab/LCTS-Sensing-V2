@@ -17,7 +17,7 @@ formatted_time = local_time.strftime("%Y-%m-%d_%H-%M-%S")
 CONTROLLER_COMM_PORT = "COM5"
 
 # Set baud rate
-BAUD_RATE = 9600
+BAUD_RATE = 115200
 
 # Open the COM port to start communications
 try:
