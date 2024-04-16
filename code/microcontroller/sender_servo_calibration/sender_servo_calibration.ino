@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include "Stepper.h"
+#include "Servo.h"
 
 int const COMMS_ADDR = 0x10;
 int const CAL_ADDR = 0x20;
@@ -7,12 +7,13 @@ uint16_t force;
 uint8_t FORCE_SENSOR = A0;
 const int REVOLUTION_STEPS = 200;
 uint16_t step = 200;
+uint8_t SERVO_PIN = 9;
 
-Stepper calibration(REVOLUTION_STEPS, 6, 7, 9, 8);
+Servo calibration;
 
 void setup()
 {
-  calibration.setSpeed(10);
+  calibration.attach(SERVO_PIN);
   pinMode(FORCE_SENSOR, INPUT);
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
@@ -27,14 +28,20 @@ void setup()
 void receiveEvent(int numBytes)
 {
   byte direction = Wire1.read();
-  Serial.println("Recieved");
+  Serial.println("Received");
   if (direction == 2)
   {
-    calibration.step(step);
+    calibration.write(45);
+    delay(2000);
+
+    calibration.write(90);
   }
   else if (direction == 1)
   {
-    calibration.step(-step);
+    calibration.write(135);
+    delay(2000);
+
+    calibration.write(90);
   }
   Serial.println(direction);
 }
