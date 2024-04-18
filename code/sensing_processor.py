@@ -14,7 +14,7 @@ formatted_time = local_time.strftime("%Y-%m-%d_%H-%M-%S")
 
 
 # Define the COM port the microcontroller is connected to
-CONTROLLER_COMM_PORT = "COM5"
+CONTROLLER_COMM_PORT = "COM11"
 
 # Set baud rate
 BAUD_RATE = 115200
@@ -36,7 +36,7 @@ else:
             # print(sensor_output)
             # print(type(sensor_output))
 
-            force, elapsed_time = (sensor for sensor in sensor_output.split(","))
+            # force, elapsed_time = (sensor for sensor in sensor_output.split(","))
 
             # force = sensor_output
             data.write(ctime(time()))
