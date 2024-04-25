@@ -1,7 +1,7 @@
-import serial
-from time import time, ctime
 from datetime import datetime
+from time import ctime, time
 
+import serial
 
 # Set time in unit seconds
 t = time()
