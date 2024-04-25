@@ -19,8 +19,8 @@ void setup()
   digitalWrite(LED_BUILTIN, HIGH);
   Serial.begin(115200);
   Wire.begin();
-  Wire1.setSDA(2);
-  Wire1.setSCL(3);
+  Wire1.setSDA(3);
+  Wire1.setSCL(2);
   Wire1.begin(CAL_ADDR);
   Wire1.onReceive(receiveEvent);
 }
@@ -32,14 +32,14 @@ void receiveEvent(int numBytes)
   if (direction == 2)
   {
     calibration.write(45);
-    delay(2000);
+    delay(1000);
 
     calibration.write(90);
   }
   else if (direction == 1)
   {
     calibration.write(135);
-    delay(2000);
+    delay(1000);
 
     calibration.write(90);
   }
