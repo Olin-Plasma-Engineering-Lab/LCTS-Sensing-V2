@@ -194,3 +194,6 @@ cython_debug/
 
 # VS Code auto folders
 .vscode
+
+# Folder containing our data
+data
