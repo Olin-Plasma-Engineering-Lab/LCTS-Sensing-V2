@@ -1,2 +1,2 @@
-# Low Cost Thrust Stand V2
-Official repository for the thrust stand used by the Olin Plasma Engineering Lab
+# Low Cost Thrust Stand Sesning V2
+Official repository for the thrust stand sensing system used by the Olin Plasma Engineering Lab
